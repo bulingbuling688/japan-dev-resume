@@ -1,0 +1,141 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[a4paper,top=0.92cm,bottom=0.92cm,left=1.28cm,right=1.18cm]{geometry}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[utf8]{inputenc}
+  \usepackage[T1]{fontenc}
+  \usepackage{CJKutf8}
+\else
+  \usepackage[UTF8]{ctex}
+\fi
+
+\usepackage{xcolor}
+\usepackage{tabularx}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{2.0pt}
+\linespread{1.14}
+\setlist[itemize]{leftmargin=1.5em,label={$\bullet$},itemsep=1.6pt,topsep=1.1pt,parsep=0pt,partopsep=0pt}
+\pagestyle{empty}
+
+\definecolor{SectionGray}{RGB}{249,250,252}
+\definecolor{TextGray}{RGB}{90,90,90}
+\definecolor{MainBlueGray}{RGB}{58,72,88}
+\definecolor{SectionTitleBlue}{RGB}{46,78,112}
+
+\newcommand{\sectionbar}[1]{%
+  \vspace{3.2pt}
+  \begingroup
+  \setlength{\fboxsep}{1.1pt}%
+  \noindent\colorbox{SectionGray}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\textbf{\textcolor{SectionTitleBlue}{#1}}}}%
+  \endgroup
+  \vspace{1.8pt}
+}
+
+\newcommand{\majorsection}[1]{%
+  \vspace{0.62\baselineskip}
+  \sectionbar{#1}
+  \vspace{0.42\baselineskip}
+}
+
+\newcommand{\entry}[3]{%
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\centering\arraybackslash}p{0.48\linewidth}>{\raggedleft\arraybackslash}p{0.28\linewidth}@{}}
+  {\textbf{\fontsize{10.8}{12}\selectfont #1}} & \textbf{#2} & {\textbf{\fontsize{10.4}{12}\selectfont #3}}
+  \end{tabularx}\\[-1pt]
+}
+
+\newcommand{\entryedu}[3]{%
+  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\centering\arraybackslash}p{0.48\linewidth}>{\raggedleft\arraybackslash}p{0.28\linewidth}@{}}
+  {\textbf{\fontsize{10.8}{12}\selectfont #1}} & \textbf{#2} & {\textbf{\fontsize{10.2}{12}\selectfont \mbox{#3}}}
+  \end{tabularx}\\[-1pt]
+}
+
+\newcommand{\projdesc}[1]{%
+  \noindent\textcolor{TextGray}{\textbf{项目描述：}}#1\\[1.1pt]
+}
+
+\newcommand{\projcore}{%
+  \noindent\textcolor{TextGray}{\textbf{核心工作：}}\\[0.0pt]
+}
+
+\begin{document}
+\ifPDFTeX
+\begin{CJK*}{UTF8}{gbsn}
+\fi
+
+% ===== 顶部信息区 =====
+\noindent\begin{minipage}[t]{0.75\linewidth}
+  \vspace{0pt}
+  {\LARGE \textbf{王世卓}}\\[6pt]
+  \renewcommand{\arraystretch}{1.2}
+  \begin{tabularx}{\linewidth}{@{}p{1.1cm}X p{1.1cm}X@{}}
+    年\;龄 & 22岁 & 性\;别 & 男 \\
+    电\;话 & 18837502016 & 邮\;箱 & 2151056619@qq.com \\
+  \end{tabularx}\\[4pt]
+  {\normalsize \textbf{求职意向：软件工程师（AI应用 / Agent方向）}}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.20\linewidth}
+  \vspace{0pt}
+  \raggedleft
+  \IfFileExists{avatar1.jpg}{%
+    \includegraphics[width=2.8cm,keepaspectratio]{avatar1.jpg}
+  }{%
+    \fbox{\parbox[c][3.5cm][c]{2.8cm}{\centering 照片}}
+  }
+\end{minipage}
+\vspace{0.2\baselineskip}
+
+% ===== 教育背景 =====
+\majorsection{教育背景}
+\entryedu{2022-09 -- 2026-06}{西南石油大学（双一流）}{数据科学与大数据技术（本科）}
+\noindent\textbf{主修课程：} \textcolor{TextGray}{操作系统、计算机网络、面向对象程序设计、数据结构、数据库系统}
+\vspace{0.3\baselineskip}
+
+% ===== 专业能力 =====
+\majorsection{专业能力}
+\begin{itemize}
+  \item \textbf{赴日意愿与学习力}：职业规划明确，期望赴日长期发展。具备较强自驱力与问题拆解能力，能全力配合公司日语培训，按期达到业务沟通标准。
+  \item \textbf{AI 应用与开发}：具备扎实 Python 基础，熟悉 ChatGPT / DeepSeek 等主流模型；熟练完成 Prompt 优化，具备Agent/RAG/Workflow 架构的实战能力。
+  \item \textbf{工程技术栈}：熟悉FastAPI/Redis/Docker 等技术栈；熟悉 \textbf{Linux 与 Git}，能快速查阅英文文档并独立完成接口开发、日志定位与问题排查。
+\end{itemize}
+
+% ===== 项目经历 =====
+\majorsection{项目经历}
+\entry{2025-07 -- 2025-09}{多 Agent 智能业务工单处理系统}{个人项目}
+\projdesc{针对售后工单处理场景，基于 Python + LangChain + FastAPI 搭建多 Agent 协作系统，实现用户文本请求的任务拆解、动作生成与结果校验。}
+\projcore
+\begin{itemize}
+  \item 设计并实现规划 Agent、执行 Agent、质检 Agent 协作流程，分别完成任务拆解、动作生成与结果校验。
+  \item 基于 JSON Schema 约束模型输出结构，针对非标准返回加入参数校验、自动重试与降级兜底机制，降低执行失败率。
+  \item 针对多轮工单交互场景，实现对话摘要压缩与上下文裁剪，减少冗余 Token 消耗，提升处理稳定性。
+  \item 支持工单分类、字段提取、动作生成等核心场景，完成基本工单处理流程。
+\end{itemize}
+
+\entry{2025-12 -- 2026-02}{基于 n8n Workflow 的多源信息采集与分析系统}{个人项目}
+\projdesc{面向个人与小团队的信息跟踪需求，基于 n8n Workflow 自动采集 RSS/API 内容，完成摘要提取、结构化整理、推送与归档，减少重复信息筛选与同步成本。}
+\projcore
+\begin{itemize}
+  \item 搭建信息采集与处理 Workflow，整合 RSS/API 数据源，通过 HTTP Request 与 Webhook 节点实现外部内容采集、清洗与标准化入库。
+  \item 基于提示词模板设计结构化抽取流程，调用 DeepSeek API 输出主题、摘要、来源等字段，提升后续检索与复用效率。
+  \item 通过自定义 JavaScript 节点对模型返回的非标准 JSON 进行二次修复与字段校验，减少推送失败和入库异常。
+  \item 打通“采集—分析—推送—归档”自动化处理流程，提升信息整理效率，为持续跟踪行业与技术动态提供支持。
+\end{itemize}
+
+% ===== 自我评价 =====
+\majorsection{自我评价}
+\begin{itemize}[itemsep=1.2pt,topsep=0.9pt]
+  \item \textbf{喜爱日本文化与生活环境}：具备明确且坚定的赴日意愿，向往当地的生活氛围，拥有较强的跨文化适应力与长期留任定力。
+  \item \textbf{扎实的技术底盘}：计算机基础扎实，对 AI 应用抱有热情，具备较强的技术自驱力，习惯独立阅读源码与英文文档解决复杂落地问题。
+  \item \textbf{闭环的工程思维}：做事踏实、责任心强，注重交付闭环。生活独立性高，抗压能力较强，能快速融入跨文化团队并提供稳定产出。
+\end{itemize}
+
+\ifPDFTeX
+\end{CJK*}
+\fi
+\end{document}
