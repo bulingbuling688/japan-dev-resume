@@ -1,6 +1,8 @@
+% !TEX program = xelatex
+% Single-column ATS-friendly resume adapted for Chinese software engineering roles.
 \documentclass[10pt,a4paper]{article}
 
-\usepackage[a4paper,top=0.92cm,bottom=0.92cm,left=1.28cm,right=1.18cm]{geometry}
+\usepackage[a4paper,top=1.25cm,bottom=1.15cm,left=1.32cm,right=1.32cm]{geometry}
 \usepackage{iftex}
 \ifPDFTeX
   \usepackage[utf8]{inputenc}
@@ -9,58 +11,85 @@
 \else
   \usepackage[UTF8]{ctex}
 \fi
-
 \usepackage{xcolor}
 \usepackage{tabularx}
 \usepackage{array}
 \usepackage{enumitem}
-\usepackage{graphicx}
+\usepackage{titlesec}
 \usepackage[hidelinks]{hyperref}
 
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{2.0pt}
-\linespread{1.14}
-\setlist[itemize]{leftmargin=1.5em,label={$\bullet$},itemsep=1.6pt,topsep=1.1pt,parsep=0pt,partopsep=0pt}
 \pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+\setlength{\tabcolsep}{0pt}
+\linespread{1.04}
 
-\definecolor{SectionGray}{RGB}{249,250,252}
-\definecolor{TextGray}{RGB}{90,90,90}
-\definecolor{MainBlueGray}{RGB}{58,72,88}
-\definecolor{SectionTitleBlue}{RGB}{46,78,112}
+\definecolor{accent}{HTML}{0F766E}
+\definecolor{accentLight}{HTML}{E6F4F1}
+\definecolor{heading}{HTML}{0F172A}
+\definecolor{muted}{HTML}{475569}
+\definecolor{rule}{HTML}{94A3B8}
 
-\newcommand{\sectionbar}[1]{%
-  \vspace{3.2pt}
-  \begingroup
-  \setlength{\fboxsep}{1.1pt}%
-  \noindent\colorbox{SectionGray}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\textbf{\textcolor{SectionTitleBlue}{#1}}}}%
-  \endgroup
-  \vspace{1.8pt}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=heading
 }
 
-\newcommand{\majorsection}[1]{%
-  \vspace{0.62\baselineskip}
-  \sectionbar{#1}
-  \vspace{0.42\baselineskip}
+\newcommand{\sectionTitle}[1]{%
+  \colorbox{accentLight}{%
+    \parbox{\dimexpr\linewidth-2\fboxsep\relax}{\textcolor{accent}{#1}}%
+  }%
 }
 
-\newcommand{\entry}[3]{%
-  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\centering\arraybackslash}p{0.48\linewidth}>{\raggedleft\arraybackslash}p{0.28\linewidth}@{}}
-  {\textbf{\fontsize{10.8}{12}\selectfont #1}} & \textbf{#2} & {\textbf{\fontsize{10.4}{12}\selectfont #3}}
-  \end{tabularx}\\[-1pt]
+\titleformat{\section}
+  {\large\bfseries\color{heading}}
+  {}
+  {0pt}
+  {\sectionTitle}
+\titlespacing*{\section}{0pt}{6pt}{4pt}
+
+\setlist[itemize]{
+  leftmargin=1.25em,
+  itemsep=1.5pt,
+  topsep=1.5pt,
+  parsep=0pt,
+  partopsep=0pt
 }
 
-\newcommand{\entryedu}[3]{%
-  \noindent\begin{tabularx}{\linewidth}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\centering\arraybackslash}p{0.48\linewidth}>{\raggedleft\arraybackslash}p{0.28\linewidth}@{}}
-  {\textbf{\fontsize{10.8}{12}\selectfont #1}} & \textbf{#2} & {\textbf{\fontsize{10.2}{12}\selectfont \mbox{#3}}}
-  \end{tabularx}\\[-1pt]
+\newcommand{\nameHeader}[1]{%
+  {\fontsize{24pt}{27pt}\selectfont\bfseries\color{heading}#1}
 }
 
-\newcommand{\projdesc}[1]{%
-  \noindent\textcolor{TextGray}{\textbf{项目描述：}}#1\\[1.1pt]
+\newcommand{\contactLine}[1]{%
+  {\small\color{muted}#1}
 }
 
-\newcommand{\projcore}{%
-  \noindent\textcolor{TextGray}{\textbf{核心工作：}}\\[0.0pt]
+\newcommand{\resumeSubheading}[4]{%
+  \begin{tabularx}{\textwidth}{@{}X r@{}}
+    \textbf{#1} & {\small #2} \\
+    {\small\color{muted}#3} & {\small\color{muted}#4}
+  \end{tabularx}
+  \vspace{-1pt}
+}
+
+\newcommand{\projectHeading}[3]{%
+  \vspace{1pt}
+  \begin{tabularx}{\textwidth}{@{}>{\raggedright\arraybackslash}X r@{}}
+    \textbf{#1} & {\small\bfseries #3} \\
+    {\small\color{muted}#2} &
+  \end{tabularx}
+  \vspace{-3pt}
+}
+
+\newcommand{\skill}[2]{%
+  \noindent\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{heading}}p{2.45cm}X@{}}
+    #1 & {\small #2}
+  \end{tabularx}\par
+  \vspace{1.5pt}
+}
+
+\newcommand{\tag}[1]{%
+  \colorbox{accentLight}{\strut\hspace{3pt}{\small\textcolor{accent}{#1}}\hspace{3pt}}
 }
 
 \begin{document}
@@ -68,71 +97,73 @@
 \begin{CJK*}{UTF8}{gbsn}
 \fi
 
-% ===== 顶部信息区 =====
-\noindent\begin{minipage}[t]{0.75\linewidth}
-  \vspace{0pt}
-  {\LARGE \textbf{王世卓}}\\[6pt]
-  \renewcommand{\arraystretch}{1.2}
-  \begin{tabularx}{\linewidth}{@{}p{1.1cm}X p{1.1cm}X@{}}
-    年\;龄 & 22岁 & 性\;别 & 男 \\
-    电\;话 & 18837502016 & 邮\;箱 & 2151056619@qq.com \\
-  \end{tabularx}\\[4pt]
-  {\normalsize \textbf{求职意向：软件工程师（AI应用 / Agent方向）}}
-\end{minipage}%
-\hfill
-\begin{minipage}[t]{0.20\linewidth}
-  \vspace{0pt}
-  \raggedleft
-  \IfFileExists{avatar1.jpg}{%
-    \includegraphics[width=2.8cm,keepaspectratio]{avatar1.jpg}
-  }{%
-    \fbox{\parbox[c][3.5cm][c]{2.8cm}{\centering 照片}}
-  }
-\end{minipage}
-\vspace{0.2\baselineskip}
+\begin{tabularx}{\textwidth}{@{}X r@{}}
+  \nameHeader{王世卓} &
+  \begin{tabular}{r@{}}
+    \contactLine{18837502016} \\
+    \contactLine{\href{mailto:2151056619@qq.com}{2151056619@qq.com}} \\
+    \contactLine{\href{https://github.com/bulingbuling688}{github.com/bulingbuling688}}
+  \end{tabular}
+\end{tabularx}
+\vspace{3pt}
 
-% ===== 教育背景 =====
-\majorsection{教育背景}
-\entryedu{2022-09 -- 2026-06}{西南石油大学（双一流）}{数据科学与大数据技术（本科）}
-\noindent\textbf{主修课程：} \textcolor{TextGray}{操作系统、计算机网络、面向对象程序设计、数据结构、数据库系统}
-\vspace{0.3\baselineskip}
+{\large\bfseries\color{accent} 软件工程师（AI 应用 / Agent 方向）}\par
+\vspace{4pt}
+{\tag{Agent} \quad \tag{RAG} \quad \tag{Workflow} \quad \tag{FastAPI} \quad \tag{n8n} \quad \tag{Docker}}
+\vspace{3pt}
 
-% ===== 专业能力 =====
-\majorsection{专业能力}
+\section{教育背景}
+\resumeSubheading
+  {西南石油大学（双一流）}
+  {2022.09 -- 2026.06}
+  {数据科学与大数据技术，本科}
+  {四川成都}
+{\small\textbf{主修课程：}操作系统、计算机网络、面向对象程序设计、数据结构、数据库系统、机器学习基础}
+
+\section{专业能力}
+\skill{AI / Agent}{ChatGPT、DeepSeek、Prompt 优化、Agent、RAG、Workflow 架构实践。}
+\skill{后端工程}{Python、FastAPI、Redis、Docker、Linux、Git，能独立完成接口开发、日志定位和部署协作。}
+\skill{自动化流程}{n8n Workflow、Webhook、HTTP Request、RSS/API 数据采集、结构化抽取、JSON 修复与字段校验。}
+\skill{赴日发展}{期望赴日长期发展，具备较强自驱力、跨文化适应力和日语培训配合意愿。}
+
+\section{项目经历}
+\projectHeading
+  {多 Agent 智能业务工单处理系统}
+  {Python / LangChain / FastAPI / JSON Schema}
+  {2025.07 -- 2025.09}
 \begin{itemize}
-  \item \textbf{赴日意愿与学习力}：职业规划明确，期望赴日长期发展。具备较强自驱力与问题拆解能力，能全力配合公司日语培训，按期达到业务沟通标准。
-  \item \textbf{AI 应用与开发}：具备扎实 Python 基础，熟悉 ChatGPT / DeepSeek 等主流模型；熟练完成 Prompt 优化，具备Agent/RAG/Workflow 架构的实战能力。
-  \item \textbf{工程技术栈}：熟悉FastAPI/Redis/Docker 等技术栈；熟悉 \textbf{Linux 与 Git}，能快速查阅英文文档并独立完成接口开发、日志定位与问题排查。
+  \item 面向售后工单场景，搭建规划 Agent、执行 Agent、质检 Agent 协作流程，完成任务拆解、动作生成与结果校验。
+  \item 基于 JSON Schema 约束模型输出，加入参数校验、自动重试与降级兜底，提升非标准模型返回下的执行稳定性。
+  \item 针对多轮工单交互实现对话摘要压缩与上下文裁剪，减少冗余 Token 消耗，形成可演示的端到端 Agent 原型。
 \end{itemize}
 
-% ===== 项目经历 =====
-\majorsection{项目经历}
-\entry{2025-07 -- 2025-09}{多 Agent 智能业务工单处理系统}{个人项目}
-\projdesc{针对售后工单处理场景，基于 Python + LangChain + FastAPI 搭建多 Agent 协作系统，实现用户文本请求的任务拆解、动作生成与结果校验。}
-\projcore
+\projectHeading
+  {基于 n8n Workflow 的多源信息采集与分析系统}
+  {n8n / DeepSeek API / Webhook / JavaScript}
+  {2025.12 -- 2026.02}
 \begin{itemize}
-  \item 设计并实现规划 Agent、执行 Agent、质检 Agent 协作流程，分别完成任务拆解、动作生成与结果校验。
-  \item 基于 JSON Schema 约束模型输出结构，针对非标准返回加入参数校验、自动重试与降级兜底机制，降低执行失败率。
-  \item 针对多轮工单交互场景，实现对话摘要压缩与上下文裁剪，减少冗余 Token 消耗，提升处理稳定性。
-  \item 支持工单分类、字段提取、动作生成等核心场景，完成基本工单处理流程。
+  \item 设计自动化 Workflow，整合 RSS/API、HTTP Request 与 Webhook，完成内容采集、清洗和标准化入库。
+  \item 基于提示词模板调用 DeepSeek API 输出主题、摘要、来源等字段，并使用 JavaScript 节点修复非标准 JSON。
+  \item 打通“采集、分析、推送、归档”流程，减少重复信息筛选成本，提高技术动态跟踪和资料整理效率。
 \end{itemize}
 
-\entry{2025-12 -- 2026-02}{基于 n8n Workflow 的多源信息采集与分析系统}{个人项目}
-\projdesc{面向个人与小团队的信息跟踪需求，基于 n8n Workflow 自动采集 RSS/API 内容，完成摘要提取、结构化整理、推送与归档，减少重复信息筛选与同步成本。}
-\projcore
+\section{实习经历}
+\resumeSubheading
+  {四川讯方信息技术有限公司}
+  {2025.03 -- 2025.07}
+  {数据处理 / 开发支持实习生}
+  {成都}
 \begin{itemize}
-  \item 搭建信息采集与处理 Workflow，整合 RSS/API 数据源，通过 HTTP Request 与 Webhook 节点实现外部内容采集、清洗与标准化入库。
-  \item 基于提示词模板设计结构化抽取流程，调用 DeepSeek API 输出主题、摘要、来源等字段，提升后续检索与复用效率。
-  \item 通过自定义 JavaScript 节点对模型返回的非标准 JSON 进行二次修复与字段校验，减少推送失败和入库异常。
-  \item 打通“采集—分析—推送—归档”自动化处理流程，提升信息整理效率，为持续跟踪行业与技术动态提供支持。
+  \item 参与业务数据核对与报表交付，梳理多类数据来源、核心字段口径、统计逻辑和输出要求。
+  \item 使用 SQL 完成多表关联、条件筛选、聚合统计和异常数据核查，维护常用查询与校验 SQL。
+  \item 协助排查字段缺失、重复记录、同步异常等数据链路问题，整理固定检查流程，支持报表稳定交付。
 \end{itemize}
 
-% ===== 自我评价 =====
-\majorsection{自我评价}
-\begin{itemize}[itemsep=1.2pt,topsep=0.9pt]
-  \item \textbf{喜爱日本文化与生活环境}：具备明确且坚定的赴日意愿，向往当地的生活氛围，拥有较强的跨文化适应力与长期留任定力。
-  \item \textbf{扎实的技术底盘}：计算机基础扎实，对 AI 应用抱有热情，具备较强的技术自驱力，习惯独立阅读源码与英文文档解决复杂落地问题。
-  \item \textbf{闭环的工程思维}：做事踏实、责任心强，注重交付闭环。生活独立性高，抗压能力较强，能快速融入跨文化团队并提供稳定产出。
+\section{自我评价}
+\begin{itemize}
+  \item 计算机基础扎实，对 AI 应用落地和 Agent 工程化保持长期关注，习惯通过文档阅读和原型实操快速补齐能力。
+  \item 做事踏实，注重交付闭环，适合承担接口核对、日志排查、文档沉淀、问题复现和自动化流程搭建等工作。
+  \item 具备明确赴日发展意愿，生活独立性和抗压能力较强，能快速融入跨文化团队并稳定产出。
 \end{itemize}
 
 \ifPDFTeX
